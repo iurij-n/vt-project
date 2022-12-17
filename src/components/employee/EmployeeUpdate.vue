@@ -52,7 +52,7 @@
               type="submit"
               variant="info">Save</b-button>
             <b-button
-              :to="{ name: 'EmployeeList' }"
+              :to="{ name: 'EmployeeDetails' }"
               variant="danger">Cancel</b-button>
           </b-col>
          </b-form>

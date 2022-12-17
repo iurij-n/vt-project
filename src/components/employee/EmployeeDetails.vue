@@ -64,21 +64,11 @@ export default {
         this.selectedEmployeeId = this.employee.id
         this.$refs.deleteConfirmModal.show()
       },
-      fetchEmployees() {
-        this.$router.push({ name: 'EmployeeList' })
-      // EmploeesService.getAll().then((response) => {
-      //   this.employees = response.data.data
-      //   })
-      },
       onDeleteConfirm() {
         EmploeesService.delete(this.employee.id).then((response) => {
-          console.log(response)
           this.alertModalTitle = 'Successfully'
           this.alertModalContent = response.data.message
           this.$refs.alertModal.show()
-          //this.alertModal.show()
-          // this.fetchEmployees()
-          // this.$router.push({ name: 'EmployeeList' })
         }).catch(() => {
           this.alertModalTitle = 'Error'
           this.alertModalContent = 'Unable to delete database record'

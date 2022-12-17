@@ -3,21 +3,6 @@
     <td>{{ employee.employee_name }}</td>
     <td>{{ employee.employee_salary }}</td>
     <td>{{ employee.employee_age }}</td>
-    <td>
-    <b-button
-      variant="default"
-      @click="onDetailsClick">Details</b-button>
-    </td>
-    <td>
-    <b-button
-      variant="success"
-      @click="onUpdateClick">Update</b-button>
-    </td>
-    <td>
-    <b-button
-      variant="danger"
-      @click="onDeleteClick">Delete</b-button>
-    </td>
   </tr>
 </template>
 <script>

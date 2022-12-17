@@ -18,7 +18,6 @@ export default {
   },
 
   delete(id) {
-    console.log(id)
     return Axios.delete('/api/v1/delete/' + id)
   }
 }
