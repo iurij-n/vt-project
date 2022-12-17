@@ -32,19 +32,27 @@
 После выполнения операций добавления, обновления и удаления, данные о сотрудниках на главной странице приложения обновляются.
 
 Для отображения списка сотрудников используется GET-запрос к
+
 ```https://dummy.restapiexample.com/api/v1/employees```
 
 Для сохранения данных используется POST-запрос к
+
 ```https://dummy.restapiexample.com/api/v1/create```
 
 Для получение данных о конкретном сотруднике  используется GET-запрос к
-```https://dummy.restapiexample.com/api/v1/employee/{ID}``` 
+
+```https://dummy.restapiexample.com/api/v1/employee/{ID}```
+
 где {ID} - значение ID выбранной записи.
 
 Для обновления данных используется PUT-запрос к
+
 ```https://dummy.restapiexample.com/api/v1/update/{ID}```
+
 где {ID} - значение ID выбранной записи.
 
 Для удаления записи используется DELETE-запрос к
+
  ```https://dummy.restapiexample.com/api/v1/delete/{ID}```
+
 где {ID} - значение ID выбранной записи.
