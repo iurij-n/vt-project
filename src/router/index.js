@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import EmployeeList from '../components/employee/EmployeeList.component.vue'
 // import EmployeeDetails from '../components/employee/EmployeeDetails.vue'
+import EmployeeCreate from '../components/employee/EmployeeCreate.vue'
+import EmployeeUpdate from '../components/employee/EmployeeUpdate.vue'
 
 Vue.use(VueRouter)
 
@@ -10,6 +12,16 @@ const routes = [
     path: '/',
     name: 'EmployeeList',
     component: EmployeeList
+  },
+  {
+    path: '/employee/create',
+    name: 'EmployeeCreate',
+    component: EmployeeCreate
+  },
+  {
+    path: '/employee/update/:id',
+    name: 'EmployeeUpdate',
+    component: EmployeeUpdate
   },
   {
     path: '/employee/:id',

@@ -4,8 +4,12 @@
         <b-col
           md="2"
           offset-md="10">
-          <b-button
-          variant="success">Create employee</b-button>
+          <b-button variant="success">
+            <router-link
+              :to="{ name: 'EmployeeCreate' }">
+                Create employee
+            </router-link>
+          </b-button>
         </b-col>
       </b-row>
       <br>
@@ -63,7 +67,9 @@ export default {
   },
   data() {
     return {
-      employees: []
+      employees: [],
+      alertModalTitle: '',
+      alertModalContent: ''
     }
   },
   created() {
@@ -78,7 +84,7 @@ export default {
       this.$router.push({ name: 'EmployeeDetails', params: { id: employeeId } })
     },
     updateEmployee(employeeId) {
-      console.log('update', employeeId)
+      this.$router.push({ name: 'EmployeeUpdate', params: { id: employeeId } })
     },
     deleteEmployee(employeeId) {
       this.selectedEmployeeId = employeeId
@@ -105,7 +111,7 @@ export default {
       this.selectedEmployeeId = null
     },
     dblClickRow(employeeId) {
-      console.log('Двойное нажатие, ряд -', employeeId)
+      this.$router.push({ name: 'EmployeeDetails', params: { id: employeeId } })
   }
 }
 }

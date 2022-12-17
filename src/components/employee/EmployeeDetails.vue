@@ -14,6 +14,29 @@
           <td>{{ employee.employee_age }}</td>
        </tr>
       </table>
+      <b-button
+        variant="success"
+        :key="employee.id"
+        @click="onUpdateClick">Update</b-button>
+      <b-button
+        variant="danger"
+        @click="onDeleteClick">Delete</b-button>
+      <b-button
+        :to="{ name: 'EmployeeList' }">Cancel</b-button>
+        <b-modal
+          ref="deleteConfirmModal"
+          title="Confirm your action"
+          @ok="onDeleteConfirm"
+          @hide="onDeleteModalHide">
+          <p class="my-4">Are you sure you want to delete this eployee?</p>
+        </b-modal>
+        <b-modal
+          ref="alertModal"
+          :title="alertModalTitle"
+          :ok-only="true"
+          @ok="onOkConfirm">
+          <p class="my-4">{{ alertModalContent }}</p>
+        </b-modal>
     </div>
 </template>
 <script>
@@ -23,13 +46,51 @@ export default {
   name: 'EmployeeDetails',
   data() {
       return {
-          employee: {}
+          employee: {},
+          alertModalTitle: '',
+          alertModalContent: ''
       }
   },
   created() {
     EmploeesService.get_employee_details(this.$router.currentRoute.params.id).then((response) => {
           this.employee = response.data.data
       })
-      }
+  },
+  methods: {
+      onUpdateClick() {
+        this.$router.push({ name: 'EmployeeUpdate', params: { id: this.employee.id } })
+      },
+      onDeleteClick() {
+        this.selectedEmployeeId = this.employee.id
+        this.$refs.deleteConfirmModal.show()
+      },
+      fetchEmployees() {
+        this.$router.push({ name: 'EmployeeList' })
+      // EmploeesService.getAll().then((response) => {
+      //   this.employees = response.data.data
+      //   })
+      },
+      onDeleteConfirm() {
+        EmploeesService.delete(this.employee.id).then((response) => {
+          console.log(response)
+          this.alertModalTitle = 'Successfully'
+          this.alertModalContent = response.data.message
+          this.$refs.alertModal.show()
+          //this.alertModal.show()
+          // this.fetchEmployees()
+          // this.$router.push({ name: 'EmployeeList' })
+        }).catch(() => {
+          this.alertModalTitle = 'Error'
+          this.alertModalContent = 'Unable to delete database record'
+          this.$refs.alertModal.show()
+        })
+      },
+      onOkConfirm() {
+        this.$router.push({ name: 'EmployeeList' })
+      },
+      onDeleteModalHide() {
+      this.selectedEmployeeId = null
+    }
+    }
   }
 </script>
