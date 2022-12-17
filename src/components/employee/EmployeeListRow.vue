@@ -1,5 +1,5 @@
 <template>
-  <tr>
+  <tr @dblclick="onRowDblclick">
     <td>{{ employee.employee_name }}</td>
     <td>{{ employee.employee_salary }}</td>
     <td>{{ employee.employee_age }}</td>
@@ -33,6 +33,9 @@
       },
       onDeleteClick() {
         this.$emit('deleteEmployee', this.employee.id)
+      },
+      onRowDblclick() {
+        this.$emit('dblClickRow', this.employee.id)
       }
     }
   };

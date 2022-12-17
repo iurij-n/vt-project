@@ -5,8 +5,8 @@ export default {
     return Axios.get('/api/v1/employees')
   },
 
-  get(id) {
-    return Axios.get('https://dummy.restapiexample.com/api/v1/employees'/{id})
+  get_employee_details(id) {
+    return Axios.get('/api/v1/employee/'+id)
   },
 
   create(data) {
@@ -18,6 +18,7 @@ export default {
   },
 
   delete(id) {
-    return Axios.delete('https://dummy.restapiexample.com/api/v1/delete'/{id})
+    // console.log(Axios.delete('/api/v1/delete/'+id))
+    return Axios.delete('/api/v1/delete/'+id)
   }
 }

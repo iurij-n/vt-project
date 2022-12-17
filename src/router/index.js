@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import EmployeeList from '../components/employee/EmployeeList.component.vue'
+// import EmployeeDetails from '../components/employee/EmployeeDetails.vue'
 
 Vue.use(VueRouter)
 
@@ -9,6 +10,11 @@ const routes = [
     path: '/',
     name: 'EmployeeList',
     component: EmployeeList
+  },
+  {
+    path: '/employee/:id',
+    name: 'EmployeeDetails',
+    component: () => import('../components/employee/EmployeeDetails.vue')
   },
   {
     path: '/about',
