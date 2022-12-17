@@ -23,22 +23,13 @@
                 </tr>
               </thead>
               <tbody>
-                <tr
+                <employee-list-row
                   v-for="employee in employees"
-                  :key="employee.id">
-                  <td>{{ employee.employee_name }}</td>
-                  <td>{{ employee.employee_salary }}</td>
-                  <td>{{ employee.employee_age }}</td>
-                  <td>
-                    <b-button variant="default">Details</b-button>
-                  </td>
-                  <td>
-                    <b-button variant="success">Update</b-button>
-                  </td>
-                  <td>
-                    <b-button variant="danger">Delete</b-button>
-                  </td>
-                </tr>
+                  :key="employee.id"
+                  :employee="employee"
+                  @detailsEmployee="detailsEmployee"
+                  @updateEmployee="updateEmployee"
+                  @deleteEmployee="deleteEmployee"/>
               </tbody>
             </table>
           </div>
@@ -48,10 +39,12 @@
   </template>
 <script>
 import EmploeesService from '@/api-services/employees.service'
+import EmployeeListRow from '@/components/employee/EmployeeListRow'
+
 export default {
   name: 'EmployeeList',
-  props: {
-    msg: String
+  components: {
+    EmployeeListRow
   },
   data() {
     return {
@@ -64,7 +57,17 @@ export default {
     }).catch((error) => {
       console.log(error.response.data)
     })
+  },
+  methods: {
+    detailsEmployee(employeeId) {
+      console.log('details', employeeId)
+    },
+    updateEmployee(employeeId) {
+      console.log('update', employeeId)
+    },
+    deleteEmployee(employeeId) {
+      console.log('delete', employeeId)
+    }
   }
 }
 </script>
-this.employees = response.data
