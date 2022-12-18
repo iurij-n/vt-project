@@ -30,7 +30,7 @@
                   :employee="employee"
                   @dblClickRow="dblClickRow"/> -->
                 <employee-list-row
-                  v-for="(employee, n) in dataLocalStorage"
+                  v-for="(employee, n) in dataLocalStorage2"
                   :key="n"
                   :employee="employee"
                   @dblClickRow="dblClickRow"/>
@@ -55,6 +55,7 @@ export default {
       employees: [],
       alertModalTitle: '',
       alertModalContent: '',
+      dataLocalStorage2: [],
       dataLocalStorage: []
     }
   },
@@ -86,12 +87,13 @@ export default {
       //   localStorage.setItem('localEmployeeList', parsed)
       //   console.log('localStorage.localEmployeeList', localStorage.localEmployeeList)
       // }
-      console.log('this.dataLocalStorage -', this.dataLocalStorage.length)
       if(!this.dataLocalStorage.length) {
         this.dataLocalStorage = response.data.data
         const parsed = JSON.stringify(this.dataLocalStorage)
         localStorage.setItem('localEmployeeList', parsed)
         console.log('localStorage.localEmployeeList', localStorage.localEmployeeList)
+        this.dataLocalStorage2 = JSON.parse(localStorage.getItem('localEmployeeList'))
+        console.log('this.dataLocalStorage2 -', this.dataLocalStorage2)
       }
     }).catch((error) => {
       console.log(error.response.data)
