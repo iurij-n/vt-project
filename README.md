@@ -6,7 +6,7 @@
 - HTML
 - CSS
 
-## Инструкция по развертыванию веб-приложения и для Linux и для Windows
+## Инструкция по развертыванию веб-приложения для Linux и Windows
  ### Клонировать проект
   ```git clone https://github.com/iurij-n/vt-project.git```
 
