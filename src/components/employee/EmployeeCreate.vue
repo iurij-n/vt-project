@@ -105,7 +105,7 @@ export default {
        .catch((error) => {
             this.isSuccessfully = false
             this.alertModalTitle = 'Error'
-            this.alertModalContent = error.response.data
+            this.alertModalContent = error
             this.$refs.alertModal.show()
         })
     },

@@ -2,7 +2,10 @@ export default {
   
     create(data) {
         let localStorageData = JSON.parse(localStorage.getItem('localEmployeeList'))
-        let id = localStorageData.slice(-1)[0].id+1
+        let id = 0
+        if (!localStorageData.length == 0) {
+            id = localStorageData.slice(-1)[0].id+1
+        }
         localStorageData.push({"id":id,"employee_name":data.name,"employee_salary":data.salary,"employee_age":data.age,"profile_image":""})
         localStorage.setItem('localEmployeeList', JSON.stringify(localStorageData))
     },
