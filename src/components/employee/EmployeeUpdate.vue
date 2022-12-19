@@ -96,11 +96,13 @@ export default {
   methods: {
     updateEmployee() {
         EmploeesService.update(this.$router.currentRoute.params.id, this.formData).then((response) => {
+          if (response.data.status == 'success') {
+            LocalEmploeesService.update(this.$router.currentRoute.params.id, this.formData)
+            }
         this.isSuccessfully = true
         this.alertModalTitle = response.data.status
         this.alertModalContent = response.data.message
         this.$refs.alertModal.show()
-        LocalEmploeesService.update(this.$router.currentRoute.params.id, this.formData)
       }).catch((error) => {
         this.isSuccessfully = false
         this.alertModalTitle = 'Error'

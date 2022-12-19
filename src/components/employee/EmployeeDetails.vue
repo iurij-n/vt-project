@@ -55,7 +55,6 @@ export default {
   created() {
     EmploeesService.get_employee_details(this.$router.currentRoute.params.id).then(() => {
           this.employee = LocalEmploeesService.get_local_employee_details(this.$router.currentRoute.params.id)
-          // this.employee = response.data.data
       })
   },
   methods: {
@@ -69,8 +68,10 @@ export default {
       },
       onDeleteConfirm() {
         EmploeesService.delete(this.employee.id).then((response) => {
-          LocalEmploeesService.delete(this.employee)
-          this.alertModalTitle = 'Successfully'
+          if (response.data.status == 'success') {
+            LocalEmploeesService.delete(this.employee)
+            }
+          this.alertModalTitle = response.data.status
           this.alertModalContent = response.data.message
           this.$refs.alertModal.show()
         }).catch(() => {

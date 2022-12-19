@@ -87,9 +87,11 @@ export default {
   },
   methods: {
     createEmployee() {
-        LocalEmploeesService.create(this.formData)
         EmploeesService.create(this.formData)
         .then((response) => {
+            if (response.data.status == 'success') {
+              LocalEmploeesService.create(this.formData)
+            }
             this.isSuccessfully = true
             this.alertModalTitle = response.data.status
             this.alertModalContent = response.data.message
