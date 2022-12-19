@@ -41,6 +41,7 @@
 </template>
 <script>
 import EmploeesService from '@/api-services/employees.service'
+import LocalEmploeesService from '@/api-services/localEmployees.service'
   
 export default {
   name: 'EmployeeDetails',
@@ -52,8 +53,9 @@ export default {
       }
   },
   created() {
-    EmploeesService.get_employee_details(this.$router.currentRoute.params.id).then((response) => {
-          this.employee = response.data.data
+    EmploeesService.get_employee_details(this.$router.currentRoute.params.id).then(() => {
+          this.employee = LocalEmploeesService.get_local_employee_details(this.$router.currentRoute.params.id)
+          // this.employee = response.data.data
       })
   },
   methods: {
@@ -63,9 +65,11 @@ export default {
       onDeleteClick() {
         this.selectedEmployeeId = this.employee.id
         this.$refs.deleteConfirmModal.show()
+
       },
       onDeleteConfirm() {
         EmploeesService.delete(this.employee.id).then((response) => {
+          LocalEmploeesService.delete(this.employee)
           this.alertModalTitle = 'Successfully'
           this.alertModalContent = response.data.message
           this.$refs.alertModal.show()

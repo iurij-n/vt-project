@@ -24,13 +24,8 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- <employee-list-row
-                  v-for="employee in employees"
-                  :key="employee.id"
-                  :employee="employee"
-                  @dblClickRow="dblClickRow"/> -->
                 <employee-list-row
-                  v-for="(employee, n) in dataLocalStorage2"
+                  v-for="(employee, n) in dataLocalStorage"
                   :key="n"
                   :employee="employee"
                   @dblClickRow="dblClickRow"/>
@@ -55,49 +50,21 @@ export default {
       employees: [],
       alertModalTitle: '',
       alertModalContent: '',
-      dataLocalStorage2: [],
       dataLocalStorage: []
     }
   },
   created() {
     EmploeesService.getAll().then((response) => {
       this.employees = response.data.data
-      // console.log('employees', this.employees)
-      // console.log(!localStorage.getItem('dataLocalStorage'))
-      // this.dataLocalStorage.push(this.employees)
-      // this.dataLocalStorage = this.employees
-      // console.log(this.dataLocalStorage)
-      // localStorage.localEmployeeList = this.dataLocalStorage
-      // // console.log('localStorage.localEmployeeList', localStorage.localEmployeeList)
-      // const parsed = JSON.stringify(this.dataLocalStorage)
-      // localStorage.setItem('localEmployeeList', parsed)
-      // console.log('localStorage.localEmployeeList', localStorage.localEmployeeList)
-
-
-    //   if(localStorage.getItem('dataLocalStorage')) {
-    //   try {
-    //     this.dataLocalStorage = JSON.parse(localStorage.getItem('cats'));
-    //   } catch(e) {
-    //     localStorage.removeItem('cats');
-    //   }
-    // }
-      // if(!localStorage.getItem('dataLocalStorage')) {
-      //   this.dataLocalStorage = this.employees
-      //   const parsed = JSON.stringify(this.dataLocalStorage)
-      //   localStorage.setItem('localEmployeeList', parsed)
-      //   console.log('localStorage.localEmployeeList', localStorage.localEmployeeList)
-      // }
-      if(!this.dataLocalStorage.length) {
-        this.dataLocalStorage = response.data.data
-        const parsed = JSON.stringify(this.dataLocalStorage)
+      if(!localStorage.getItem('localEmployeeList')) {
+        const parsed = JSON.stringify(this.employees)
         localStorage.setItem('localEmployeeList', parsed)
-        console.log('localStorage.localEmployeeList', localStorage.localEmployeeList)
-        this.dataLocalStorage2 = JSON.parse(localStorage.getItem('localEmployeeList'))
-        console.log('this.dataLocalStorage2 -', this.dataLocalStorage2)
+        this.dataLocalStorage = JSON.parse(localStorage.getItem('localEmployeeList'))
       }
     }).catch((error) => {
-      console.log(error.response.data)
+      console.log(error)
     })
+    this.dataLocalStorage = JSON.parse(localStorage.getItem('localEmployeeList'))
   },
   methods: {
     dblClickRow(employeeId) {

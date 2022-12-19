@@ -69,6 +69,7 @@
 
 <script>
 import EmploeesService from '@/api-services/employees.service'
+import LocalEmploeesService from '@/api-services/localEmployees.service'
 
 export default {
   name: 'EmployeeUpdate',
@@ -85,11 +86,12 @@ export default {
     }
   },
   created() {
-    EmploeesService.get_employee_details(this.$router.currentRoute.params.id).then((response) => {
-        this.formData.name = response.data.data.employee_name
-        this.formData.salary = response.data.data.employee_salary
-        this.formData.age = response.data.data.employee_age
-        })
+    EmploeesService.get_employee_details(this.$router.currentRoute.params.id).then(() => {
+      this.employee = LocalEmploeesService.get_local_employee_details(this.$router.currentRoute.params.id)
+      this.formData.name = this.employee.employee_name
+      this.formData.salary = this.employee.employee_salary
+      this.formData.age = this.employee.employee_age
+    })
   },
   methods: {
     updateEmployee() {
@@ -98,6 +100,7 @@ export default {
         this.alertModalTitle = response.data.status
         this.alertModalContent = response.data.message
         this.$refs.alertModal.show()
+        LocalEmploeesService.update(this.$router.currentRoute.params.id, this.formData)
       }).catch((error) => {
         this.isSuccessfully = false
         this.alertModalTitle = 'Error'

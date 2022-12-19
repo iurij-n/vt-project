@@ -69,6 +69,7 @@
 
 <script>
 import EmploeesService from '@/api-services/employees.service'
+import LocalEmploeesService from '@/api-services/localEmployees.service'
 
 export default {
   name: 'EmployeeCreate',
@@ -86,6 +87,7 @@ export default {
   },
   methods: {
     createEmployee() {
+        LocalEmploeesService.create(this.formData)
         EmploeesService.create(this.formData)
         .then((response) => {
             this.isSuccessfully = true
